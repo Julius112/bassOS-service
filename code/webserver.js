@@ -22,6 +22,10 @@ var app = express();
 var port = '3000';
 app.set('port', port);
 app.use(bodyParser.json());
+app.enable('trust proxy');
+
+/* Captive Portal Address Storage */
+var known_clients = [];
 
 /* Serve Frontend */
 app.use(express.static(__dirname + '/www'));
@@ -316,6 +320,33 @@ app.get('/settings', function (req, res) {
 app.get('/switch', function (req, res) {
 	res.setHeader('content-type', 'application/json');
 	res.json(switch_array);
+});
+
+app.get('/install', function (req, res) {
+	known_clients.push(req.ip);
+	console.log("add host: "+req.ip);
+	res.sendFile('captive_ios_2.html', { root: __dirname + "/www" } );
+});
+
+function checkKnownClients(ip) {
+	var known = false;
+	for(var i=0; i < known_clients.length; i++)
+	{
+		if(known_clients[i] === ip)
+			known = true;
+	}
+	return known;
+}
+
+app.get('*', function(req, res){
+	if(checkKnownClients(req.ip)) {
+		res.sendFile('captive_ios_done.html', { root: __dirname + "/www" } );
+	}
+	else {
+		res.sendFile('captive_ios.html', { root: __dirname + "/www" } );
+		//res.send(req.headers['x-forwarded-for']);
+		//res.send(req.ip+", "+req.ips);
+	}
 });
 
 /* switch control not implemented jet
