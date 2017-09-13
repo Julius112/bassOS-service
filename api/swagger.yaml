@@ -1,0 +1,269 @@
+swagger: "2.0"
+info:
+  description: "This is the backend service for Bass OS. This service provides interfaces between the frontend and Hardware, OS and audio services."
+  version: "1.0.0"
+  title: "bassOS-service"
+  license:
+    name: "GPL v3.0"
+    url: "https://www.gnu.org/licenses/gpl.html"
+host: "10.10.10.1"
+basePath: "/"
+tags:
+- name: "settings"
+  description: "Change the settings of the system"
+- name: "os"
+  description: "Operations about the OS"
+- name: "switch"
+  description: "Operations about the switches"
+- name: "services"
+  description: "Operations about the audio services"
+- name: "events"
+  description: "Subscriptions to events"
+schemes:
+- "http"
+paths:
+  /settings:
+    get:
+      tags:
+      - "setting-status"
+      summary: "Get the current status and name of all settings"
+      operationId: "getAllSettings"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Setting'
+  /settings/{setting-id}:
+    get:
+      tags:
+      - "setting-status"
+      summary: "Get the current status of a setting"
+      operationId: "getSettingStatus"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "setting-id"
+        in: "path"
+        description: "The id of the setting"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SettingStatus"
+        400:
+          description: "invalid setting id"
+    put:
+      tags:
+      - "setting-status"
+      summary: "Change the status of a setting"
+      operationId: "setSettingStatus"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "setting-id"
+        in: "path"
+        description: "The id of the setting"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "setting-status"
+        description: "The new status of the setting"
+        required: true
+        schema:
+          $ref: "#/definitions/SettingStatus"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ServiceStatus"
+        405:
+          description: "validation Error"
+        400:
+          description: "invalid setting id"
+  /os/{operation}:
+    put:
+      tags:
+      - "os-operation"
+      summary: "Execute an OS operation"
+      operationId: "executeOsOperation"
+      parameters:
+      - name: "operation"
+        in: "path"
+        description: "The name of the operation to execute"
+        required: true
+        type: "string"
+        pattern: "shutdown|reboot"
+      responses:
+        400:
+          description: "invalid operation supplied"
+        200:
+          description: "operation executed"
+  /switches:
+    get:
+      tags:
+      - "switch-status"
+      summary: "Get the current status and name of all switches"
+      operationId: "getAllSwitches"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Switch'
+  /switches/{switch-id}:
+    get:
+      tags:
+      - "switch-status"
+      summary: "Get the current status of a switch"
+      operationId: "getSwitchStatus"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "switch-id"
+        in: "path"
+        description: "The id of the switch"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SwitchStatus"
+        400:
+          description: "invalid switch id"
+    put:
+      tags:
+      - "switch-status"
+      summary: "Change the status of a switch"
+      operationId: "setSwitchStatus"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "switch-id"
+        in: "path"
+        description: "The name of the switch"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "switch-status"
+        description: "The new status of the switch"
+        required: true
+        schema:
+          $ref: "#/definitions/SwitchStatus"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SwitchStatus"
+        405:
+          description: "validation Error"
+        400:
+          description: "invalid switch id"
+  /services/{service-name}:
+    get:
+      tags:
+      - "service-status"
+      summary: "Get the current status of a service"
+      operationId: "getServiceStatus"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "service-name"
+        in: "path"
+        description: "The name of the service"
+        required: true
+        type: "string"
+        pattern: "bluetooth|airplay|mpd"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ServiceStatus"
+        400:
+          description: "invalid service name"
+    put:
+      tags:
+      - "service-status"
+      summary: "Change the status of a service"
+      operationId: "setServiceStatus"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "service-name"
+        in: "path"
+        description: "The name of the service"
+        required: true
+        type: "string"
+        pattern: "bluetooth|airplay|mpd"
+      - in: "body"
+        name: "service-status"
+        description: "The new status of the service"
+        required: true
+        schema:
+          $ref: "#/definitions/ServiceStatus"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ServiceStatus"
+        405:
+          description: "validation Error"
+        400:
+          description: "invalid service name"
+  /events:
+    get:
+      tags:
+      - "event-subscription"
+      summary: "Subscribe to HTML5 ServerSentEvents"
+      operationId: "subscribe"
+      produces:
+      - "application/text"
+      responses:
+        200:
+          description: "successful subscribed"
+        500:
+          description: "could not subscribe"
+definitions:
+  ServiceStatus:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+        pattern: "active|playing|stopped"
+  SettingStatus:
+    type: "object"
+    properties:
+      status:
+        type: "boolean"
+  Setting:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      status:
+        type: "boolean"
+  SwitchStatus:
+    type: "object"
+    properties:
+      status:
+        type: "boolean"
+  Switch:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      status:
+        type: "boolean"
