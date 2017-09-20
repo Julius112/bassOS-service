@@ -37,6 +37,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Setting'
+      x-swagger-router-controller: "settings"
   /settings/{setting-id}:
     get:
       tags:
@@ -58,6 +59,7 @@ paths:
             $ref: "#/definitions/SettingStatus"
         400:
           description: "invalid setting id"
+      x-swagger-router-controller: "settings"
     put:
       tags:
       - "setting-status"
@@ -86,6 +88,7 @@ paths:
           description: "validation Error"
         400:
           description: "invalid setting id"
+      x-swagger-router-controller: "settings"
   /os/{operation}:
     put:
       tags:
@@ -104,6 +107,7 @@ paths:
           description: "invalid operation supplied"
         200:
           description: "operation executed"
+      x-swagger-router-controller: "os"
   /switches:
     get:
       tags:
@@ -119,6 +123,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Switch'
+      x-swagger-router-controller: "switches"
   /switches/{switch-id}:
     get:
       tags:
@@ -140,6 +145,7 @@ paths:
             $ref: "#/definitions/SwitchStatus"
         400:
           description: "invalid switch id"
+      x-swagger-router-controller: "switches"
     put:
       tags:
       - "switch-status"
@@ -168,6 +174,7 @@ paths:
           description: "validation Error"
         400:
           description: "invalid switch id"
+      x-swagger-router-controller: "switches"
   /services/{service-name}:
     get:
       tags:
@@ -190,6 +197,7 @@ paths:
             $ref: "#/definitions/ServiceStatus"
         400:
           description: "invalid service name"
+      x-swagger-router-controller: "services"
     put:
       tags:
       - "service-status"
@@ -219,6 +227,7 @@ paths:
           description: "validation Error"
         400:
           description: "invalid service name"
+      x-swagger-router-controller: "services"
   /events:
     get:
       tags:
@@ -232,6 +241,7 @@ paths:
           description: "successful subscribed"
         500:
           description: "could not subscribe"
+      x-swagger-router-controller: "events"
 definitions:
   ServiceStatus:
     type: "object"
