@@ -4,10 +4,10 @@
   "description": "The webserver for the bassOS web app.",
   "main": "app.js",
   "dependencies": {
-    "path": "0.12.7",
-    "body-parser": "1.17.2",
-    "express": "4.15.4",
-    "http": "0.0.0"
+    "express": "4.14.1",
+    "js-yaml": "3.3.0",
+    "swagger-tools": "0.10.1",
+    "url-join": "1.1.0"
   },
   "scripts": {
     "start": "node ./server.js"

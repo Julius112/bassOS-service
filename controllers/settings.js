@@ -3,7 +3,7 @@ const config = require("../config");
 const joinUrl = require("url-join");
 
 //TODO move in config
-var settings = [{"bluetooth" : true}, {"bluetooth_pairable" : false}, {"mpd" : "true"}, {"airplay" : true}, {"auto_source" : "true"}];
+var settings = [{"bluetooth" : true}, {"bluetooth_pairable" : false}, {"mpd" : true}, {"airplay" : true}, {"auto_source" : true}];
 
 exports.getAllSettings = (req, res) => {
 	res.setHeader('content-type', 'application/json');
