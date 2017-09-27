@@ -8,6 +8,10 @@ module.exports = {
 	server: {
 		port: 3000
 	},
+	switches: [
+		{name: "switch1", status: false, pin: 10},
+		{name: "switch2", status: true, pin: 11}
+	],
 	settings: [
 		{"bluetooth" : true},
 		{"bluetooth_pairable" : false},

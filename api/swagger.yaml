@@ -124,7 +124,7 @@ paths:
             items:
               $ref: '#/definitions/Switch'
       x-swagger-router-controller: "switches"
-  /switches/{switch-id}:
+  /switches/{switch_id}:
     get:
       tags:
       - "switch-status"
@@ -133,7 +133,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "switch-id"
+      - name: "switch_id"
         in: "path"
         description: "The id of the switch"
         required: true
@@ -154,13 +154,13 @@ paths:
       consumes:
       - "application/json"
       parameters:
-      - name: "switch-id"
+      - name: "switch_id"
         in: "path"
         description: "The name of the switch"
         required: true
         type: "integer"
       - in: "body"
-        name: "switch-status"
+        name: "switch_status"
         description: "The new status of the switch"
         required: true
         schema:
