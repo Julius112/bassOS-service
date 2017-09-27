@@ -15,6 +15,11 @@ module.exports = {
 		{"airplay" : true},
 		{"auto_source" : true}
 	],
+	/* TODO insert full path to binaries for operations */
+	os_operations: {
+		shutdown: "sudo halt",
+		reboot: "sudo reboot",
+	},
 	swagger: {
 		spec: path.join(__dirname, '..', 'api', 'swagger.yaml'),
 		router: {

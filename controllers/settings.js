@@ -1,6 +1,5 @@
 'use strict';
 const config = require("../config");
-const joinUrl = require("url-join");
 
 exports.getAllSettings = (req, res) => {
 	res.setHeader('content-type', 'application/json');
