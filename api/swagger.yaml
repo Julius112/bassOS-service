@@ -38,7 +38,7 @@ paths:
             items:
               $ref: '#/definitions/Setting'
       x-swagger-router-controller: "settings"
-  /settings/{setting-id}:
+  /settings/{setting_id}:
     get:
       tags:
       - "setting-status"
@@ -47,7 +47,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "setting-id"
+      - name: "setting_id"
         in: "path"
         description: "The id of the setting"
         required: true
@@ -68,13 +68,13 @@ paths:
       consumes:
       - "application/json"
       parameters:
-      - name: "setting-id"
+      - name: "setting_id"
         in: "path"
         description: "The id of the setting"
         required: true
         type: "integer"
       - in: "body"
-        name: "setting-status"
+        name: "setting_status"
         description: "The new status of the setting"
         required: true
         schema:

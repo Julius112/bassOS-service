@@ -13,12 +13,12 @@ module.exports = {
 		{name: "switch2", status: true, pin: 11}
 	],
 	settings: [
-		{"bluetooth" : true},
-		{"bluetooth_pairable" : false},
-		{"mpd" : true},
-		{"airplay" : true},
-		{"auto_source" : true}
-	],
+		{name: "bluetooth", status : true},
+		{name: "bluetooth_pairable", status : false},
+		{name: "mpd", status : true},
+		{name: "airplay", status : true},
+		{name: "auto_source", status : true}
+			],
 	/* TODO insert full path to binaries for operations */
 	os_operations: {
 		shutdown: "sudo halt",
