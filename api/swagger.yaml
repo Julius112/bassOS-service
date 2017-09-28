@@ -83,7 +83,6 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/ServiceStatus"
         405:
           description: "validation Error"
         400:
@@ -169,7 +168,6 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/SwitchStatus"
         405:
           description: "validation Error"
         400:

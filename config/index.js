@@ -18,7 +18,10 @@ module.exports = {
 		{name: "mpd", status : true},
 		{name: "airplay", status : true},
 		{name: "auto_source", status : true}
-			],
+	],
+	sse_events: {
+		settingChange: 2
+	},
 	services: [
 		{
 			name: "bluetooth",

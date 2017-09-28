@@ -40,6 +40,8 @@ exports.setSettingStatus = (req, res) => {
 		}
 		*/
 		res.status(200).send("successful operation");
-		sse.sendUpdate({id : 1, name : "test"});
+		/* TODO redesign the SSE events */
+		see_event_data[config.settings[req.swagger.params.setting_id.value].name] = {state: req.swagger.params.setting_status.value.status};
+		sse.sendUpdate({event_id : config.sse_events.settingChange, event_data: sse_event_data});
 	}
 }
