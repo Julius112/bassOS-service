@@ -14,11 +14,40 @@ module.exports = {
 	],
 	settings: [
 		{name: "bluetooth", status : true},
-		{name: "bluetooth_pairable", status : false},
+		//{name: "bluetooth_pairable", status : false},
 		{name: "mpd", status : true},
 		{name: "airplay", status : true},
 		{name: "auto_source", status : true}
 			],
+	services: [
+		{
+			name: "bluetooth",
+			state: "stopped",
+			operations: {
+				start: "sudo /bin/systemctl start bt_speaker",
+				stop: "sudo /bin/systemctl stop bt_speaker",
+				playback_stop: "sudo /bin/systemctl restart bt_speaker"
+			}
+		},
+		{
+			name: "airplay",
+			state: "stopped",
+			operations: {
+				start: "sudo /bin/systemctl start shairport-sync",
+				stop: "sudo /bin/systemctl stop shairport-sync",
+				playback_stop: "sudo /bin/systemctl restart shairport-sync"
+			}
+		},
+		{
+			name: "mpd",
+			state: "stopped",
+			operations: {
+				start: "sudo /bin/systemctl start mpd.socket && sudo /bin/systemctl start mpd && sudo /bin/systemctl start mpd-watchdog",
+				stop: "sudo /bin/systemctl stop mpd-watchdog && sudo /bin/systemctl stop mpd.socket && sudo /bin/systemctl stop mpd",
+				playback_stop: "mpc pause"
+			}
+		}
+	],
 	/* TODO insert full path to binaries for operations */
 	os_operations: {
 		shutdown: "sudo halt",

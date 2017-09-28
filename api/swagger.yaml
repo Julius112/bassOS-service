@@ -175,7 +175,7 @@ paths:
         400:
           description: "invalid switch id"
       x-swagger-router-controller: "switches"
-  /services/{service-name}:
+  /services/{service_name}:
     get:
       tags:
       - "service-status"
@@ -184,7 +184,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "service-name"
+      - name: "service_name"
         in: "path"
         description: "The name of the service"
         required: true
@@ -206,23 +206,21 @@ paths:
       consumes:
       - "application/json"
       parameters:
-      - name: "service-name"
+      - name: "service_name"
         in: "path"
         description: "The name of the service"
         required: true
         type: "string"
         pattern: "bluetooth|airplay|mpd"
       - in: "body"
-        name: "service-status"
+        name: "service_playback"
         description: "The new status of the service"
         required: true
         schema:
-          $ref: "#/definitions/ServiceStatus"
+          $ref: "#/definitions/ServicePlayback"
       responses:
         200:
           description: "successful operation"
-          schema:
-            $ref: "#/definitions/ServiceStatus"
         405:
           description: "validation Error"
         400:
@@ -249,6 +247,11 @@ definitions:
       status:
         type: "string"
         pattern: "active|playing|stopped"
+  ServicePlayback:
+    type: "object"
+    properties:
+      playback:
+        type: "boolean"
   SettingStatus:
     type: "object"
     properties:

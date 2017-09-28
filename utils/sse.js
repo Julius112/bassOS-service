@@ -1,5 +1,4 @@
 'use strict';
-const config = require("../config");
 
 var id = 1;
 
