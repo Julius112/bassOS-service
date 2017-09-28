@@ -1,5 +1,6 @@
 'use strict';
 const config = require("../config");
+const sse = require("../utils/sse");
 
 exports.getAllSettings = (req, res) => {
 	res.setHeader('content-type', 'application/json');
@@ -23,5 +24,6 @@ exports.setSettingStatus = (req, res) => {
 		config.settings[req.swagger.params.setting_id.value].status = req.swagger.params.setting_status.value.status;
 		/*TODO execute setting operation */
 		res.status(200).send("successful operation");
+		sse.sendUpdate({id : 1, name : "test"});
 	}
 }
