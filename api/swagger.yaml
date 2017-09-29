@@ -82,7 +82,6 @@ paths:
       responses:
         200:
           description: "successful operation"
-          schema:
         405:
           description: "validation Error"
         400:
@@ -167,7 +166,6 @@ paths:
       responses:
         200:
           description: "successful operation"
-          schema:
         405:
           description: "validation Error"
         400:
