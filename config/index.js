@@ -17,7 +17,7 @@ module.exports = {
 		//{name: "bluetooth_pairable", status : false},
 		{name: "mpd", status : true},
 		{name: "airplay", status : true},
-		{name: "auto_source", status : true}
+		{name: "auto_source", status : false}
 	],
 	sse_events: {
 		settingChange: 2
@@ -55,6 +55,7 @@ module.exports = {
 	os_operations: {
 		shutdown: "sudo halt",
 		reboot: "sudo reboot",
+		startup: "sudo ogg123 /usr/share/sounds/freedesktop/stereo/service-login.oga"
 	},
 	swagger: {
 		spec: path.join(__dirname, '..', 'api', 'swagger.yaml'),

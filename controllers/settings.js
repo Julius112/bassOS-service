@@ -31,6 +31,7 @@ exports.setSettingStatus = (req, res) => {
 					config.settings[req.swagger.params.setting_id.value].name === "mpd" ) {
 			for (var i = 0; i < config.services.length; i++)
 				if (config.services[i].name === config.settings[req.swagger.params.setting_id.value].name) {
+					console.log(config.services[i].name+": "+req.swagger.params.setting_status.value.status);
 					service_manager.service_change(i, req.swagger.params.setting_status.value.status);
 					break;
 				}
@@ -41,7 +42,8 @@ exports.setSettingStatus = (req, res) => {
 		*/
 		res.status(200).send("successful operation");
 		/* TODO redesign the SSE events */
-		see_event_data[config.settings[req.swagger.params.setting_id.value].name] = {state: req.swagger.params.setting_status.value.status};
+		var sse_event_data = {};
+		sse_event_data[config.settings[req.swagger.params.setting_id.value].name] = {state: req.swagger.params.setting_status.value.status};
 		sse.sendUpdate({event_id : config.sse_events.settingChange, event_data: sse_event_data});
 	}
 }

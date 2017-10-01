@@ -5,7 +5,7 @@ const sse = require("../utils/sse");
 exports.subscribe = (req, res) => {
 	res.setHeader('content-type', 'application/json');
 	// set connection to never end
-	req.socket.setTimeout(Infinity);
+	req.socket.setTimeout(Number.MAX_VALUE);
 	// send header for SSE connection
 	res.writeHead(200, {
 		'Content-Type': 'text/event-stream',

@@ -3,14 +3,14 @@ const config = require("../config");
 const exec = require('child_process').exec;
 
 exports.source_change = (id, playback) => {
-	//console.log("source_change: "+id);
+	console.log("source_change: "+id);
 	if (id < 0) {
 		for (var j = 0; j < config.settings.length; j++)
 			if (config.settings[j].name === "auto_source") {
 				/* if autosource is set */
 				if (config.settings[j].status) {
 					for (var i = 0; i < config.services.length; i++)
-						for (var k = 0; k < config.settings.lenght; k++)
+						for(var k = 0; k < config.settings.length; k++)
 							if (config.services[i].name === config.settings[k].name) {
 								if (config.settings[k].status)
 									if (config.services[i].state === "stopped") {
@@ -20,22 +20,23 @@ exports.source_change = (id, playback) => {
 								break;
 							}
 				}
+				/* if autosource is not set */
 				else {
 					var service_playing = 0;
 					for (var i = 0; i < config.services.length; i++) {
-						if (config.services[i].state === "playing") {
+						if (config.services[i].state === "playing")
 							service_playing++;
-						}
 					}
-					if (service_playing > 0)
+					if (service_playing > 0) {
 						for (var i = 0; i < config.services.length; i++)
 							if (config.services[i].state === "active") {
 								config.services[i].state = "stopped";
 								exec(config.services[i].operations.stop);
 							}
+					}
 					else {
 						for (var i = 0; i < config.services.length; i++)
-							for (var k = 0; k < config.settings.lenght; k++)
+							for (var k = 0; k < config.settings.length; k++)
 								if (config.services[i].name === config.settings[k].name) {
 									if (config.settings[k].status) {
 										config.services[i].state = "active";
@@ -60,7 +61,7 @@ exports.source_change = (id, playback) => {
 						for (var i = 0; i < config.services.length; i++) {
 							if (i === id)
 								continue;
-							for (var k = 0; k < config.settings.lenght; k++)
+							for (var k = 0; k < config.settings.length; k++)
 								if (config.services[i].name === config.settings[k].name) {
 									if (config.settings[k].status) {
 										config.services[i].state = "active";
