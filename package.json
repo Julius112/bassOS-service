@@ -1,0 +1,17 @@
+{
+  "name": "bassOS-UI",
+  "version": "1.0.0",
+  "description": "The webserver for the bassOS web app.",
+  "main": "app.js",
+  "dependencies": {
+    "express": "4.14.1",
+    "js-yaml": "3.3.0",
+    "swagger-tools": "0.10.1",
+    "cors": "2.8.3",
+    "url-join": "1.1.0"
+  },
+  "scripts": {
+    "start": "node ./server.js"
+  },
+  "author": "Julius Niedworok"
+}

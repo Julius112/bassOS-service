@@ -23,9 +23,6 @@ var port = '3000';
 app.set('port', port);
 app.use(bodyParser.json());
 
-/* Serve Frontend */
-app.use(express.static(__dirname + '/www'));
-
 /* SSE API Connect Call */
 app.get('/stats', function(req, res) {
 	
