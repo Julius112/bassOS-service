@@ -1,5 +1,6 @@
 'use strict';
 const config = require("../config");
+const sse = require("../utils/sse");
 
 exports.getAllSwitches = (req, res) => {
 	res.setHeader('content-type', 'application/json');
@@ -23,5 +24,8 @@ exports.setSwitchStatus = (req, res) => {
 		config.switches[req.swagger.params.switch_id.value].status = req.swagger.params.switch_status.value.status;
 		/*TODO execute switch operation */
 		res.status(200).send("successful operation");
+
+		/* TODO redesign the SSE events */
+		sse.sendUpdate({event_id : config.sse_events.switchChange, event_data: {id: req.swagger.params.switch_id.value, state: req.swagger.params.switch_status.value.status}});
 	}
 }

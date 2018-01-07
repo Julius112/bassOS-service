@@ -9,8 +9,8 @@ module.exports = {
 		port: 3000
 	},
 	switches: [
-		{name: "switch1", status: false, pin: 10},
-		{name: "switch2", status: true, pin: 11}
+		{name: "Hupe", status: false, pin: 10},
+		{name: "Unterboden", status: true, pin: 11}
 	],
 	settings: [
 		{name: "bluetooth", status : true},
@@ -20,6 +20,7 @@ module.exports = {
 		{name: "auto_source", status : false}
 	],
 	sse_events: {
+		switchChange: 1,
 		settingChange: 2
 	},
 	services: [
